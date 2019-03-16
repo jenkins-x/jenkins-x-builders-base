@@ -111,7 +111,6 @@ pipelineConfig:
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
-
-            # - name: update-bot
-            #   image: jenkinxio:maven-builder
-            #   command: ./update-bot.sh
+            - name: update-bot
+              image: gcr.io/jenkinsxio/builder-maven:0.1.286
+              command: ./update-bot.sh
