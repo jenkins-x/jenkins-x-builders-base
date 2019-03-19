@@ -42,7 +42,7 @@ pipelineConfig:
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/workspace/builder-base/Dockerfile.rubybase
-                - --destination=gcr.io/jenkinsxio/builder-ruby:${inputs.params.version}
+                - --destination=gcr.io/jenkinsxio/builder-rubybase:${inputs.params.version}
                 - --context=/workspace/workspace
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
@@ -51,7 +51,7 @@ pipelineConfig:
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/workspace/builder-base/Dockerfile.swiftbase
-                - --destination=gcr.io/jenkinsxio/builder-swift:${inputs.params.version}
+                - --destination=gcr.io/jenkinsxio/builder-swiftbase:${inputs.params.version}
                 - --context=/workspace/workspace
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
@@ -97,7 +97,7 @@ pipelineConfig:
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/workspace/builder-base/Dockerfile.rubybase
-                - --destination=gcr.io/jenkinsxio/builder-ruby:${inputs.params.version}
+                - --destination=gcr.io/jenkinsxio/builder-rubybase:${inputs.params.version}
                 - --context=/workspace/workspace
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
@@ -106,7 +106,7 @@ pipelineConfig:
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/workspace/builder-base/Dockerfile.swiftbase
-                - --destination=gcr.io/jenkinsxio/builder-swift:${inputs.params.version}
+                - --destination=gcr.io/jenkinsxio/builder-swiftbase:${inputs.params.version}
                 - --context=/workspace/workspace
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
