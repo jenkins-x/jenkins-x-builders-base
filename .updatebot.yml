@@ -3,8 +3,3 @@ github:
   - name: jenkins-x
     repositories:
     - name: jenkins-x-builders
-    - name: jenkins-x-serverless
-  - name: jenkins-x-charts
-    repositories:
-    - name: jx-build-templates
-    - name: prow
