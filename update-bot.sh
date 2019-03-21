@@ -4,9 +4,12 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-updatebot push-regex -r "FROM gcr.io/jenkinsxio/builder-base:(.*)" -v ${VERSION} "*/Dockerfile"
-updatebot push-regex -r "FROM gcr.io/jenkinsxio/builder-rubybase:(.*)" -v ${VERSION} "*/Dockerfile"
-updatebot push-regex -r "FROM gcr.io/jenkinsxio/builder-swiftbase:(.*)" -v ${VERSION} "*/Dockerfile"
-updatebot push-regex -r "\s+- --image=gcr.io/jenkinsxio/builder-base:(.*)" -v ${VERSION} "jenkins-x.yml"
-updatebot push-regex -r "\s+- --image=gcr.io/jenkinsxio/builder-rubybase:(.*)" -v ${VERSION} "jenkins-x.yml"
-updatebot push-regex -r "\s+- --image=gcr.io/jenkinsxio/builder-swiftbase:(.*)" -v ${VERSION} "jenkins-x.yml"
+updatebot push-regex -r \
+	"FROM\sgcr.io/jenkinsxio/builder-base:(.*)" \
+	"FROM\sgcr.io/jenkinsxio/builder-rubybase:(.*)" \
+	"FROM\sgcr.io/jenkinsxio/builder-swiftbase:(.*)" \
+	"\s+-\s--image=gcr.io/jenkinsxio/builder-base:(.*)" \
+	"\s+-\s--image=gcr.io/jenkinsxio/builder-rubybase:(.*)" \
+	"\s+-\s--image=gcr.io/jenkinsxio/builder-swiftbase:(.*)" \
+	-v ${VERSION} \
+	 'Dockerfile' 'jenkins-x.yml'
