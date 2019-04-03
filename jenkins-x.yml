@@ -28,31 +28,31 @@ pipelineConfig:
             # build base images
             - name: build-base
               image: centos:7
-              command: /workspace/workspace/builder-base/build-ng.sh
+              command: /workspace/source/builder-base/build-ng.sh
             - name: build-and-push-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/workspace/builder-base/Dockerfile.base
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.base
                 - --destination=gcr.io/jenkinsxio/builder-base:${inputs.params.version}
-                - --context=/workspace/workspace
+                - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
             - name: build-and-push-ruby-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/workspace/builder-base/Dockerfile.rubybase
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.rubybase
                 - --destination=gcr.io/jenkinsxio/builder-rubybase:${inputs.params.version}
-                - --context=/workspace/workspace
+                - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
             - name: build-and-push-swift-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/workspace/builder-base/Dockerfile.swiftbase
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.swiftbase
                 - --destination=gcr.io/jenkinsxio/builder-swiftbase:${inputs.params.version}
-                - --context=/workspace/workspace
+                - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
@@ -91,31 +91,31 @@ pipelineConfig:
             # build base images
             - name: build-base
               image: centos:7
-              command: /workspace/workspace/builder-base/build-ng.sh
+              command: /workspace/source/builder-base/build-ng.sh
             - name: build-and-push-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/workspace/builder-base/Dockerfile.base
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.base
                 - --destination=gcr.io/jenkinsxio/builder-base:${inputs.params.version}
-                - --context=/workspace/workspace
+                - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
             - name: build-and-push-ruby-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/workspace/builder-base/Dockerfile.rubybase
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.rubybase
                 - --destination=gcr.io/jenkinsxio/builder-rubybase:${inputs.params.version}
-                - --context=/workspace/workspace
+                - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
             - name: build-and-push-swift-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/workspace/builder-base/Dockerfile.swiftbase
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.swiftbase
                 - --destination=gcr.io/jenkinsxio/builder-swiftbase:${inputs.params.version}
-                - --context=/workspace/workspace
+                - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
