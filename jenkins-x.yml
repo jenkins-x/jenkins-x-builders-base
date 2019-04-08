@@ -32,7 +32,7 @@ pipelineConfig:
             - name: build-and-push-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/source/builder-base/Dockerfile.base
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.base.generated
                 - --destination=gcr.io/jenkinsxio/builder-base:${inputs.params.version}
                 - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
@@ -41,7 +41,7 @@ pipelineConfig:
             - name: build-and-push-ruby-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/source/builder-base/Dockerfile.ruby
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.ruby.generated
                 - --destination=gcr.io/jenkinsxio/builder-rubybase:${inputs.params.version}
                 - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
@@ -50,7 +50,7 @@ pipelineConfig:
             - name: build-and-push-swift-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/source/builder-base/Dockerfile.swift
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.swift.generated
                 - --destination=gcr.io/jenkinsxio/builder-swiftbase:${inputs.params.version}
                 - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
@@ -95,7 +95,7 @@ pipelineConfig:
             - name: build-and-push-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/source/builder-base/Dockerfile.base
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.base.generated
                 - --destination=gcr.io/jenkinsxio/builder-base:${inputs.params.version}
                 - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
@@ -104,7 +104,7 @@ pipelineConfig:
             - name: build-and-push-ruby-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/source/builder-base/Dockerfile.ruby
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.ruby.generated
                 - --destination=gcr.io/jenkinsxio/builder-rubybase:${inputs.params.version}
                 - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
@@ -113,7 +113,7 @@ pipelineConfig:
             - name: build-and-push-swift-base
               command: /kaniko/executor
               args:
-                - --dockerfile=/workspace/source/builder-base/Dockerfile.swift
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.swift.generated
                 - --destination=gcr.io/jenkinsxio/builder-swiftbase:${inputs.params.version}
                 - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache

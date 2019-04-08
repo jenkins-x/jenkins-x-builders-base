@@ -4,9 +4,9 @@ set -u
 
 echo "Building images with version ${VERSION}"
 
-cat /workspace/source/builder-base/Dockerfile > /workspace/source/builder-base/Dockerfile.base
-cat /workspace/source/Dockerfile.common >> /workspace/source/builder-base/Dockerfile.base
-cat /workspace/source/builder-base/Dockerfile.common >> /workspace/source/builder-base/Dockerfile.base
+cat /workspace/source/builder-base/Dockerfile > /workspace/source/builder-base/Dockerfile.base.generated
+cat /workspace/source/Dockerfile.common >> /workspace/source/builder-base/Dockerfile.base.generated
+cat /workspace/source/builder-base/Dockerfile.common >> /workspace/source/builder-base/Dockerfile.base.generated
 
 function build_image {
   name=$1
@@ -14,9 +14,9 @@ function build_image {
   echo "pack $name uses base image: $base"
 
   # generate a docker image
-  cat /workspace/source/builder-base/Dockerfile.$base > /workspace/source/builder-base/Dockerfile.$name
-  cat /workspace/source/Dockerfile.common >> Dockerfile.$name
-  cat /workspace/source/builder-base/Dockerfile.common >> /workspace/source/builder-base/Dockerfile.$name
+  cat /workspace/source/builder-base/Dockerfile.$base > /workspace/source/builder-base/Dockerfile.$name.generated
+  cat /workspace/source/Dockerfile.common >> /workspace/source/builder-base/Dockerfile.$name.generated
+  cat /workspace/source/builder-base/Dockerfile.common >> /workspace/source/builder-base/Dockerfile.$name.generated
 }
 
 build_image "ruby" "rubybase"
