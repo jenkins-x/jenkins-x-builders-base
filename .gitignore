@@ -1,1 +1,2 @@
 .updatebot-repos
+**/Dockerfile*.generated
