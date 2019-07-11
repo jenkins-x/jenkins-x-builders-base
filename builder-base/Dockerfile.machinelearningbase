@@ -1,0 +1,2 @@
+FROM jenkinsxio/builder-machine-learning-baseimage:0.0.22
+

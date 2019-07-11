@@ -3,6 +3,13 @@ pipelineConfig:
   pipelines:
     pullRequest:
       pipeline:
+        options:
+          containerOptions:
+            resources:
+              limits:
+                memory: 6Gi
+              requests:
+                memory: 2Gi
         agent:
           image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
         stages:
@@ -13,7 +20,8 @@ pipelineConfig:
               - name: GOOGLE_APPLICATION_CREDENTIALS
                 value: /builder/home/kaniko-secret.json
             steps:
-            - image: jenkinsxio/jx:1.3.963
+            - name: kaniko-secret
+              image: jenkinsxio/jx:1.3.963
               command: jx
               args:
                 - step
@@ -56,9 +64,34 @@ pipelineConfig:
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
+            - name: build-and-push-machine-learning-base
+              command: /kaniko/executor
+              args:
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.machinelearning.generated
+                - --destination=gcr.io/jenkinsxio/builder-machine-learningbase:${inputs.params.version}
+                - --context=/workspace/source
+                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache=true
+                - --cache-dir=/workspace
+            - name: build-and-push-machine-learning-gpu-base
+              command: /kaniko/executor
+              args:
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.machinelearninggpu.generated
+                - --destination=gcr.io/jenkinsxio/builder-machine-learning-gpubase:${inputs.params.version}
+                - --context=/workspace/source
+                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache=true
+                - --cache-dir=/workspace
 
     release:
       pipeline:
+        options:
+          containerOptions:
+            resources:
+              limits:
+                memory: 6Gi
+              requests:
+                memory: 2Gi
         agent:
           image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
         stages:
@@ -77,7 +110,8 @@ pipelineConfig:
               - name: GIT_AUTHOR_NAME
                 value: jenkins-x-bot
             steps:
-            - image: jenkinsxio/jx:1.3.963
+            - name: kaniko-scret
+              image: jenkinsxio/jx:1.3.963
               command: jx
               args:
                 - step
@@ -88,6 +122,7 @@ pipelineConfig:
                 - kaniko-secret
                 - -f
                 - /builder/home/kaniko-secret.json
+
             # build base images
             - name: build-base
               image: centos:7
@@ -115,6 +150,24 @@ pipelineConfig:
               args:
                 - --dockerfile=/workspace/source/builder-base/Dockerfile.swift.generated
                 - --destination=gcr.io/jenkinsxio/builder-swiftbase:${inputs.params.version}
+                - --context=/workspace/source
+                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache=true
+                - --cache-dir=/workspace
+            - name: build-and-push-machine-learning-base
+              command: /kaniko/executor
+              args:
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.machinelearning.generated
+                - --destination=gcr.io/jenkinsxio/builder-machine-learningbase:${inputs.params.version}
+                - --context=/workspace/source
+                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache=true
+                - --cache-dir=/workspace
+            - name: build-and-push-machine-learning-gpu-base
+              command: /kaniko/executor
+              args:
+                - --dockerfile=/workspace/source/builder-base/Dockerfile.machinelearninggpu.generated
+                - --destination=gcr.io/jenkinsxio/builder-machine-learning-gpubase:${inputs.params.version}
                 - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
