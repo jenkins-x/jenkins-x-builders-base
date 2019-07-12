@@ -1,2 +1,2 @@
-FROM jenkinsxio/builder-swift-baseimage:0.0.22
+FROM jenkinsxio/builder-swift-baseimage:0.0.23
 

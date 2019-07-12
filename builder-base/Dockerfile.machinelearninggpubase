@@ -1,2 +1,2 @@
-FROM jenkinsxio/builder-machine-learning-gpu-baseimage:0.0.22
+FROM jenkinsxio/builder-machine-learning-gpu-baseimage:0.0.23
 
