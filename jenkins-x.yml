@@ -64,24 +64,6 @@ pipelineConfig:
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
-            - name: build-and-push-machine-learning-base
-              command: /kaniko/executor
-              args:
-                - --dockerfile=/workspace/source/builder-base/Dockerfile.machinelearning.generated
-                - --destination=gcr.io/jenkinsxio/builder-machine-learningbase:${inputs.params.version}
-                - --context=/workspace/source
-                - --cache-repo=gcr.io/jenkinsxio/cache
-                - --cache=true
-                - --cache-dir=/workspace
-            - name: build-and-push-machine-learning-gpu-base
-              command: /kaniko/executor
-              args:
-                - --dockerfile=/workspace/source/builder-base/Dockerfile.machinelearninggpu.generated
-                - --destination=gcr.io/jenkinsxio/builder-machine-learning-gpubase:${inputs.params.version}
-                - --context=/workspace/source
-                - --cache-repo=gcr.io/jenkinsxio/cache
-                - --cache=true
-                - --cache-dir=/workspace
 
     release:
       pipeline:
@@ -150,24 +132,6 @@ pipelineConfig:
               args:
                 - --dockerfile=/workspace/source/builder-base/Dockerfile.swift.generated
                 - --destination=gcr.io/jenkinsxio/builder-swiftbase:${inputs.params.version}
-                - --context=/workspace/source
-                - --cache-repo=gcr.io/jenkinsxio/cache
-                - --cache=true
-                - --cache-dir=/workspace
-            - name: build-and-push-machine-learning-base
-              command: /kaniko/executor
-              args:
-                - --dockerfile=/workspace/source/builder-base/Dockerfile.machinelearning.generated
-                - --destination=gcr.io/jenkinsxio/builder-machine-learningbase:${inputs.params.version}
-                - --context=/workspace/source
-                - --cache-repo=gcr.io/jenkinsxio/cache
-                - --cache=true
-                - --cache-dir=/workspace
-            - name: build-and-push-machine-learning-gpu-base
-              command: /kaniko/executor
-              args:
-                - --dockerfile=/workspace/source/builder-base/Dockerfile.machinelearninggpu.generated
-                - --destination=gcr.io/jenkinsxio/builder-machine-learning-gpubase:${inputs.params.version}
                 - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true

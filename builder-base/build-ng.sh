@@ -21,5 +21,3 @@ function build_image {
 
 build_image "ruby" "rubybase"
 build_image "swift" "swiftbase"
-build_image "machinelearning" "machinelearningbase"
-build_image "machinelearninggpu" "machinelearninggpubase"
