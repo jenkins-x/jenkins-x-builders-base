@@ -13,7 +13,7 @@ RUN curl -f https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}
   rm -rf linux-amd64
 
 # helm3
-RUN curl -L https://get.helm.sh/helm-v3.0.0-alpha.1-linux-amd64.tar.gz | tar xzv && \
+RUN curl -L https://get.helm.sh/helm-v3.0.0-beta.2-linux-amd64.tar.gz | tar xzv && \
   mv linux-amd64/helm /usr/bin/helm3 && \
   rm -rf linux-amd64
 
