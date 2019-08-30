@@ -3,3 +3,4 @@ github:
   - name: jenkins-x
     repositories:
     - name: jenkins-x-builders
+    - name: jenkins-x-builders-ml
