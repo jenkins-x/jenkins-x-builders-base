@@ -137,5 +137,6 @@ pipelineConfig:
                 - --cache=true
                 - --cache-dir=/workspace
             - name: update-bot
-              image: gcr.io/jenkinsxio/builder-base:${inputs.params.version}
+              # Can't use the image we've just built here in the same stage
+              image: gcr.io/jenkinsxio/builder-base:0.0.45
               command: ./update-bot.sh
