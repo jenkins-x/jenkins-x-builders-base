@@ -136,7 +136,13 @@ pipelineConfig:
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
                 - --cache-dir=/workspace
+
+            # update downstream dependencies
             - name: update-bot
-              # Can't use the image we've just built here in the same stage
-              image: gcr.io/jenkinsxio/builder-base:0.0.45
+              image: gcr.io/jenkinsxio/builder-maven:0.1.696
               command: ./update-bot.sh
+
+            # Create the release notes
+            - name: changelog
+              image: gcr.io/jenkinsxio/builder-go:0.1.696
+              command: ./changelog.sh
