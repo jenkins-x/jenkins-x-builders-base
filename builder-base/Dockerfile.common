@@ -17,12 +17,6 @@ RUN curl -L https://get.helm.sh/helm-v3.0.0-beta.2-linux-amd64.tar.gz | tar xzv 
   mv linux-amd64/helm /usr/bin/helm3 && \
   rm -rf linux-amd64
 
-RUN curl -f -L https://github.com/jstrachan/helm/releases/download/untagged-93375777c6644a452a64/helm-linux-amd64.tar.gz -o helm3.tgz && \
-  tar xf helm3.tgz && \
-  mv helm /usr/bin/helm3
-
-RUN rm *.tgz
-
 # gcloud
 RUN curl -f -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar xzv && \
   mv google-cloud-sdk /usr/bin/
