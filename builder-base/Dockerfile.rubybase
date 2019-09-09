@@ -1,2 +1,2 @@
-FROM gcr.io/jenkinsxio/builder-ruby-baseimage:0.0.26
+FROM gcr.io/jenkinsxio/builder-ruby-baseimage:0.0.29
 
