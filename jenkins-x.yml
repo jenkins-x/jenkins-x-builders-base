@@ -137,12 +137,12 @@ pipelineConfig:
                 - --cache=true
                 - --cache-dir=/workspace
 
-            # update downstream dependencies
-            - name: update-bot
-              image: gcr.io/jenkinsxio/builder-maven:0.1.696
-              command: ./update-bot.sh
-
             # Create the release notes
             - name: changelog
-              image: gcr.io/jenkinsxio/builder-go:0.1.696
+              image: gcr.io/jenkinsxio/builder-go:0.1.740
               command: ./changelog.sh
+
+            # update downstream dependencies
+            - name: update-bot
+              image: gcr.io/jenkinsxio/builder-maven:0.1.740
+              command: ./update-bot.sh

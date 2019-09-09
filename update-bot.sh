@@ -3,14 +3,36 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-set -f
 
-updatebot push-regex -r \
-	'FROM\sgcr.io/jenkinsxio/builder-base:(.*)' \
-	'FROM\sgcr.io/jenkinsxio/builder-rubybase:(.*)' \
-	'FROM\sgcr.io/jenkinsxio/builder-swiftbase:(.*)' \
-	'\s+-\s--image=gcr.io/jenkinsxio/builder-base:(.*)' \
-	'\s+-\s--image=gcr.io/jenkinsxio/builder-rubybase:(.*)' \
-	'\s+-\s--image=gcr.io/jenkinsxio/builder-swiftbase:(.*)' \
-	-v ${VERSION} \
-	 \*/Dockerfile jenkins-x.yml
+jx step create pr docker \
+    --name gcr.io/jenkinsxio/builder-base \
+    --version ${VERSION} \
+    --repo https://github.com/jenkins-x/jenkins-x-builders.git
+
+jx step create pr docker \
+    --name gcr.io/jenkinsxio/builder-rubybase \
+    --version ${VERSION} \
+    --repo https://github.com/jenkins-x/jenkins-x-builders.git
+
+jx step create pr docker \
+    --name gcr.io/jenkinsxio/builder-swiftbase \
+    --version ${VERSION} \
+    --repo https://github.com/jenkins-x/jenkins-x-builders.git
+
+jx step create pr regex \
+    --regex '\s+-\s--image=gcr.io/jenkinsxio/builder-base:(.*)' \
+    --version ${VERSION} \
+    --files jenkins-x.yml \
+    --repo https://github.com/jenkins-x/jenkins-x-builders.git
+
+jx step create pr regex \
+    --regex '\s+-\s--image=gcr.io/jenkinsxio/builder-rubybase:(.*)' \
+    --version ${VERSION} \
+    --files jenkins-x.yml \
+    --repo https://github.com/jenkins-x/jenkins-x-builders.git
+
+jx step create pr regex \
+    --regex '\s+-\s--image=gcr.io/jenkinsxio/builder-swiftbase:(.*)' \
+    --version ${VERSION} \
+    --files jenkins-x.yml \
+    --repo https://github.com/jenkins-x/jenkins-x-builders.git
