@@ -1,6 +1,11 @@
 # USER jenkins
 WORKDIR /home/jenkins
 
+# velero
+RUN curl -f -L https://github.com/heptio/velero/releases/download/v${VELERO_VERSION}/velero-v${VELERO_VERSION}-linux-amd64.tar.gz | tar xzv && \
+  mv velero-v${VELERO_VERSION}-linux-amd64/velero /usr/bin/ && \
+  rm -rf velero-v${VELERO_VERSION}-linux-amd64
+
 # Docker
 RUN curl -f https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION-ce.tgz | tar xvz && \
   mv docker/docker /usr/bin/ && \
@@ -81,9 +86,6 @@ RUN mkdir goreleaser && \
     mv goreleaser/goreleaser /usr/bin/ && \
     rm -rf goreleaser
 
-# velero
-RUN curl -f -L https://github.com/heptio/velero/releases/download/v${VELERO_VERSION}/velero-v${VELERO_VERSION}-linux-amd64.tar.gz | tar xzv && \
-  mv velero /usr/bin/
 
 ENV PATH ${PATH}:/opt/google/chrome
 
