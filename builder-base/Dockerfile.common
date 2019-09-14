@@ -24,6 +24,7 @@ ENV PATH=$PATH:/usr/bin/google-cloud-sdk/bin
 
 # install the docker credential plugin
 RUN gcloud components install docker-credential-gcr
+RUN gcloud components install alpha -q
 
 # jx-release-version
 RUN curl -f -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v${JX_RELEASE_VERSION}/jx-release-version-linux && \
