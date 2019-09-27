@@ -1,2 +1,2 @@
-FROM gcr.io/jenkinsxio/builder-baseimage:0.0.31
+FROM gcr.io/jenkinsxio/builder-baseimage:0.0.32
 
