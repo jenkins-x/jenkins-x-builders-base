@@ -1,2 +1,2 @@
-FROM gcr.io/jenkinsxio/builder-swift-baseimage:0.0.30
+FROM gcr.io/jenkinsxio/builder-swift-baseimage:0.0.32
 
