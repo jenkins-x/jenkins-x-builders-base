@@ -1,83 +1,71 @@
 # USER jenkins
 WORKDIR /home/jenkins
 
+ENV PATH=$PATH:/usr/bin/google-cloud-sdk/bin
+
 # Docker
 RUN curl -f https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION-ce.tgz | tar xvz && \
   mv docker/docker /usr/bin/ && \
-  rm -rf docker
-
+  rm -rf docker && \
 # helm
-RUN curl -f https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz  | tar xzv && \
+  curl -f https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz  | tar xzv && \
   mv linux-amd64/helm /usr/bin/ && \
   mv linux-amd64/tiller /usr/bin/ && \
-  rm -rf linux-amd64
-
+  rm -rf linux-amd64 && \
 # helm3
-RUN curl -L https://get.helm.sh/helm-v3.0.0-beta.3-linux-amd64.tar.gz | tar xzv && \
+  curl -L https://get.helm.sh/helm-v3.0.0-beta.3-linux-amd64.tar.gz | tar xzv && \
   mv linux-amd64/helm /usr/bin/helm3 && \
-  rm -rf linux-amd64
-
+  rm -rf linux-amd64 && \
 # gcloud
-RUN curl -f -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar xzv && \
-  mv google-cloud-sdk /usr/bin/
-ENV PATH=$PATH:/usr/bin/google-cloud-sdk/bin
-
+  curl -f -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar xzv && \
+  mv google-cloud-sdk /usr/bin/ && \
 # install the docker credential plugin
-RUN gcloud components install docker-credential-gcr
-RUN gcloud components install alpha -q
-
+  gcloud components install docker-credential-gcr && \
+# install alpha gcloud components
+  gcloud components install alpha -q && \
 # jx-release-version
-RUN curl -f -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v${JX_RELEASE_VERSION}/jx-release-version-linux && \
+  curl -f -o ./jx-release-version -L https://github.com/jenkins-x/jx-release-version/releases/download/v${JX_RELEASE_VERSION}/jx-release-version-linux && \
   mv jx-release-version /usr/bin/ && \
-  chmod +x /usr/bin/jx-release-version
-
+  chmod +x /usr/bin/jx-release-version && \
 # exposecontroller
-RUN curl -f -L https://github.com/fabric8io/exposecontroller/releases/download/v$EXPOSECONTROLLER_VERSION/exposecontroller-linux-amd64 > exposecontroller && \
+  curl -f -L https://github.com/fabric8io/exposecontroller/releases/download/v$EXPOSECONTROLLER_VERSION/exposecontroller-linux-amd64 > exposecontroller && \
   chmod +x exposecontroller && \
-  mv exposecontroller /usr/bin/
-
+  mv exposecontroller /usr/bin/ && \
 # skaffold
-RUN curl -f -Lo skaffold https://storage.googleapis.com/skaffold/releases/v${SKAFFOLD_VERSION}/skaffold-linux-amd64 && \
+  curl -f -Lo skaffold https://storage.googleapis.com/skaffold/releases/v${SKAFFOLD_VERSION}/skaffold-linux-amd64 && \
   chmod +x skaffold && \
-  mv skaffold /usr/bin
-
+  mv skaffold /usr/bin && \
 # container structure test
-RUN curl -LO https://storage.googleapis.com/container-structure-test/v${CONTAINER_STRUCTURE_TEST_VERSION}/container-structure-test-linux-amd64 && \
-   chmod +x container-structure-test-linux-amd64 && \
-   mv container-structure-test-linux-amd64 /usr/local/bin/container-structure-test
-
+  curl -LO https://storage.googleapis.com/container-structure-test/v${CONTAINER_STRUCTURE_TEST_VERSION}/container-structure-test-linux-amd64 && \
+  chmod +x container-structure-test-linux-amd64 && \
+  mv container-structure-test-linux-amd64 /usr/local/bin/container-structure-test && \
 # kubectl
-RUN curl -f -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
+  curl -f -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
   chmod +x kubectl && \
-  mv kubectl /usr/bin/
-
+  mv kubectl /usr/bin/ && \
 # aws ecr docker credential helper.
 # Currently using https://github.com/estahn/amazon-ecr-credential-helper as there are no releases yet in the main repo
 # Main repo issues tracking at https://github.com/awslabs/amazon-ecr-credential-helper/issues/80
-RUN mkdir ecr && \
-    curl -f -L https://github.com/estahn/amazon-ecr-credential-helper/releases/download/v0.1.1/amazon-ecr-credential-helper_0.1.1_linux_amd64.tar.gz | tar -xzv -C ./ecr/ && \
-    mv ecr/docker-credential-ecr-login /usr/bin/ && \
-    rm -rf ecr
-
+  mkdir ecr && \
+  curl -f -L https://github.com/estahn/amazon-ecr-credential-helper/releases/download/v0.1.1/amazon-ecr-credential-helper_0.1.1_linux_amd64.tar.gz | tar -xzv -C ./ecr/ && \
+  mv ecr/docker-credential-ecr-login /usr/bin/ && \
+  rm -rf ecr && \
 # ACR docker credential helper
 #??https://github.com/Azure/acr-docker-credential-helper
-RUN mkdir acr && \
-    curl -f -L https://aadacr.blob.core.windows.net/acr-docker-credential-helper/docker-credential-acr-linux-amd64.tar.gz | tar -xzv -C ./acr/ && \
-    mv acr/docker-credential-acr-linux /usr/bin/ && \
-    rm -rf acr
-    
+  mkdir acr && \
+  curl -f -L https://aadacr.blob.core.windows.net/acr-docker-credential-helper/docker-credential-acr-linux-amd64.tar.gz | tar -xzv -C ./acr/ && \
+  mv acr/docker-credential-acr-linux /usr/bin/ && \
+  rm -rf acr && \
 # reflex
-RUN curl -f -L https://github.com/ccojocar/reflex/releases/download/v${REFLEX_VERSION}/reflex_${REFLEX_VERSION}_linux_amd64.tar.gz | tar xzv && \
-  mv reflex /usr/bin/
-
+  curl -f -L https://github.com/ccojocar/reflex/releases/download/v${REFLEX_VERSION}/reflex_${REFLEX_VERSION}_linux_amd64.tar.gz | tar xzv && \
+  mv reflex /usr/bin/ && \
 # goreleaser
-RUN mkdir goreleaser && \
-    curl -Lf https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/goreleaser_Linux_x86_64.tar.gz | tar -xzv -C ./goreleaser/ && \
-    mv goreleaser/goreleaser /usr/bin/ && \
-    rm -rf goreleaser
-
+  mkdir goreleaser && \
+  curl -Lf https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/goreleaser_Linux_x86_64.tar.gz | tar -xzv -C ./goreleaser/ && \
+  mv goreleaser/goreleaser /usr/bin/ && \
+  rm -rf goreleaser && \
 # velero
-RUN curl -f -L https://github.com/heptio/velero/releases/download/v${VELERO_VERSION}/velero-v${VELERO_VERSION}-linux-amd64.tar.gz | tar xzv && \
+  curl -f -L https://github.com/heptio/velero/releases/download/v${VELERO_VERSION}/velero-v${VELERO_VERSION}-linux-amd64.tar.gz | tar xzv && \
   mv velero-v${VELERO_VERSION}-linux-amd64/velero /usr/bin/ && \
   rm -rf velero-v${VELERO_VERSION}-linux-amd64
 
