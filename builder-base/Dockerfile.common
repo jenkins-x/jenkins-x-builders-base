@@ -67,7 +67,10 @@ RUN curl -f https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKE
 # velero
   curl -f -L https://github.com/heptio/velero/releases/download/v${VELERO_VERSION}/velero-v${VELERO_VERSION}-linux-amd64.tar.gz | tar xzv && \
   mv velero-v${VELERO_VERSION}-linux-amd64/velero /usr/bin/ && \
-  rm -rf velero-v${VELERO_VERSION}-linux-amd64
+  rm -rf velero-v${VELERO_VERSION}-linux-amd64 && \
+# eksctl
+  curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/${EKSCTL_VERSION}/eksctl_Linux_amd64.tar.gz" | tar xz -C /tmp && \
+  mv /tmp/eksctl /usr/local/bin
 
 ENV PATH ${PATH}:/opt/google/chrome
 
