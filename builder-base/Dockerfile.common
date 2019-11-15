@@ -13,7 +13,7 @@ RUN curl -f https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKE
   mv linux-amd64/tiller /usr/bin/ && \
   rm -rf linux-amd64 && \
 # helm3
-  curl -L https://get.helm.sh/helm-v3.0.0-beta.4-linux-amd64.tar.gz | tar xzv && \
+  curl -L https://get.helm.sh/helm-v3.0.0-linux-amd64.tar.gz | tar xzv && \
   mv linux-amd64/helm /usr/bin/helm3 && \
   rm -rf linux-amd64 && \
 # gcloud
