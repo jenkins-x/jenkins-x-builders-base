@@ -139,10 +139,10 @@ pipelineConfig:
 
             # Create the release notes
             - name: changelog
-              image: gcr.io/jenkinsxio/builder-go:0.1.740
+              image: gcr.io/jenkinsxio/builder-go
               command: ./changelog.sh
 
             # update downstream dependencies
             - name: update-bot
-              image: gcr.io/jenkinsxio/builder-maven:0.1.740
+              image: gcr.io/jenkinsxio/builder-maven
               command: ./update-bot.sh
