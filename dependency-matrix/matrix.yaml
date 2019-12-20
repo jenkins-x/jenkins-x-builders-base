@@ -3,5 +3,5 @@ dependencies:
   owner: jenkins-x
   repo: jenkins-x-builders-base-image
   url: https://github.com/jenkins-x/jenkins-x-builders-base-image
-  version: 0.0.34
+  version: 0.0.35
   versionURL: ""
