@@ -40,7 +40,7 @@ RUN curl -f https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKE
   chmod +x container-structure-test-linux-amd64 && \
   mv container-structure-test-linux-amd64 /usr/local/bin/container-structure-test && \
 # kubectl
-  curl -f -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
+  curl -f -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl && \
   chmod +x kubectl && \
   mv kubectl /usr/bin/ && \
 # aws ecr docker credential helper.
