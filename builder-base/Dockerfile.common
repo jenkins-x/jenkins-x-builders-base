@@ -13,9 +13,13 @@ RUN curl -f https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKE
   mv linux-amd64/tiller /usr/bin/ && \
   rm -rf linux-amd64 && \
 # helm3
-  curl -L https://get.helm.sh/helm-v3.0.0-linux-amd64.tar.gz | tar xzv && \
+  curl -L https://get.helm.sh/helm-v${HELM3_VERSION}-linux-amd64.tar.gz | tar xzv && \
   mv linux-amd64/helm /usr/bin/helm3 && \
   rm -rf linux-amd64 && \
+# helmfile
+  curl -LO https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 && \
+  mv helmfile_linux_amd64 /usr/bin/helmfile && \
+  chmod +x /usr/bin/helmfile && \
 # gcloud
   curl -f -L https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${GCLOUD_VERSION}-linux-x86_64.tar.gz | tar xzv && \
   mv google-cloud-sdk /usr/bin/ && \
