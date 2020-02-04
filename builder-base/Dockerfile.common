@@ -16,6 +16,8 @@ RUN curl -f https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKE
   curl -L https://get.helm.sh/helm-v${HELM3_VERSION}-linux-amd64.tar.gz | tar xzv && \
   mv linux-amd64/helm /usr/bin/helm3 && \
   rm -rf linux-amd64 && \
+  mkdir /usr/bin/helm3-bin && \
+  ln -s /usr/bin/helm3 /usr/bin/helm3-bin/helm && \
 # helmfile
   curl -LO https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 && \
   mv helmfile_linux_amd64 /usr/bin/helmfile && \
