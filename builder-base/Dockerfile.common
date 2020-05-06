@@ -78,6 +78,9 @@ RUN curl -f https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKE
   curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/${EKSCTL_VERSION}/eksctl_Linux_amd64.tar.gz" | tar xz -C /tmp && \
   mv /tmp/eksctl /usr/local/bin
 
-ENV PATH ${PATH}:/opt/google/chrome
+ENV PATH /home/jenkins/.jx/bin:${PATH}:/opt/google/chrome
+
+# TODO: Remove deps downloaded above that are now included in jx bin
+COPY builder-base/deps/bin/* /home/jenkins/.jx/bin/
 
 CMD ["helm","version"]

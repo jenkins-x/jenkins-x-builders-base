@@ -8,6 +8,12 @@ cat /workspace/source/builder-base/Dockerfile > /workspace/source/builder-base/D
 cat /workspace/source/Dockerfile.common >> /workspace/source/builder-base/Dockerfile.base.generated
 cat /workspace/source/builder-base/Dockerfile.common >> /workspace/source/builder-base/Dockerfile.base.generated
 
+export JX_HOME=/workspace/source/builder-base/deps
+jx install dependencies --all
+unset JX_HOME
+
+ls -la /workspace/source/builder-base/deps/bin/
+
 function build_image {
   name=$1
   base=$2
