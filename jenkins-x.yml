@@ -34,7 +34,7 @@ pipelineConfig:
             steps:
             # build base images
             - name: build-base
-              image: gcr.io/jenkinsxio/builder-go:0.0.0-SNAPSHOT-PR-7104-79
+              image: gcr.io/jenkinsxio/builder-go:2.1.155-776
               command: /workspace/source/builder-base/build-ng.sh
             - name: build-and-push-base
               command: /kaniko/executor
@@ -105,7 +105,7 @@ pipelineConfig:
             steps:
             # build base images
             - name: build-base
-              image: gcr.io/jenkinsxio/builder-go:0.0.0-SNAPSHOT-PR-7104-79
+              image: gcr.io/jenkinsxio/builder-go:2.1.155-776
               command: /workspace/source/builder-base/build-ng.sh
             - name: build-and-push-base
               command: /kaniko/executor
