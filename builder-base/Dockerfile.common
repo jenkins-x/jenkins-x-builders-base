@@ -50,10 +50,9 @@ RUN curl -f https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKE
   chmod +x kubectl && \
   mv kubectl /usr/bin/ && \
 # aws ecr docker credential helper.
-# Currently using https://github.com/estahn/amazon-ecr-credential-helper as there are no releases yet in the main repo
-# Main repo issues tracking at https://github.com/awslabs/amazon-ecr-credential-helper/issues/80
   mkdir ecr && \
-  curl -f -L https://github.com/estahn/amazon-ecr-credential-helper/releases/download/v0.1.1/amazon-ecr-credential-helper_0.1.1_linux_amd64.tar.gz | tar -xzv -C ./ecr/ && \
+  curl -f -L -o ./ecr/docker-credential-ecr-login https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.4.0/linux-amd64/docker-credential-ecr-login && \
+  chmod +x ecr/docker-credential-ecr-login && \
   mv ecr/docker-credential-ecr-login /usr/bin/ && \
   rm -rf ecr && \
 # ACR docker credential helper
