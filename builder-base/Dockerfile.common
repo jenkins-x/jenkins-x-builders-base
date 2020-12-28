@@ -12,6 +12,7 @@ RUN curl -f https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKE
   mv linux-amd64/helm /usr/bin/ && \
   mv linux-amd64/tiller /usr/bin/ && \
   rm -rf linux-amd64 && \
+  helm init --client-only --home /tekton/home && \
 # helm3
   curl -L https://get.helm.sh/helm-v${HELM3_VERSION}-linux-amd64.tar.gz | tar xzv && \
   mv linux-amd64/helm /usr/bin/helm3 && \
